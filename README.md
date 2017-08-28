@@ -18,4 +18,5 @@ pytest .
 Todo:
 - Miltiple miners
 - Task with miltiple ports
-- Check for network metrics
+- Checks for container network metrics
+- Checks for container resource restrictions
