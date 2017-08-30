@@ -1,4 +1,7 @@
+import re
+
 import pytest
+
 import cli
 import infrastructure
 
@@ -19,7 +22,7 @@ def test_miner_list(yoba):
     # check miner ip
     miner_addr = list(rs['info'].keys())[0]
     ip, port = miner_addr.split(':')
-    assert ip == '127.0.0.1'
+    assert re.match(r'[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}', ip) is not None
     assert int(port) > 1024 and int(port) < 65535
 
 
