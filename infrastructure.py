@@ -1,16 +1,19 @@
-import subprocess
 import os
 import re
 import signal
+import subprocess
 import time
+from pathlib import Path
 
 import docker
 
+HOMEDIR = str(Path.home())
+GOPATH = os.getenv('GOPATH', os.path.join(HOMEDIR, 'go'))
 
-BIN_ROOT = os.getenv('GOPATH') + '/src/github.com/sonm-io/core'
-HUB = BIN_ROOT + '/sonmhub'
-MINER = BIN_ROOT + '/sonmminer'
-CLI = BIN_ROOT + '/sonmcli'
+BIN_ROOT = os.path.join(GOPATH, 'src/github.com/sonm-io/core')
+HUB = os.path.join(BIN_ROOT, 'sonmhub')
+MINER = os.path.join(BIN_ROOT, 'sonmminer')
+CLI = os.path.join(BIN_ROOT, '/sonmcli')
 BOOT_TIMEOUT = 10
 
 

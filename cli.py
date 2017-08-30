@@ -2,12 +2,14 @@ import json
 import os
 import subprocess
 
+import infrastructure
 
-CLI = os.getenv('GOPATH') + '/src/github.com/sonm-io/core/sonmcli'
+HUB_ADDR = os.getenv('HUB_ADDR', '[::]:10001')
+CLI = os.path.join(infrastructure.GOPATH, 'src/github.com/sonm-io/core/sonmcli')
 
 
 def _call_cli(*args):
-    cmd = [CLI, '--addr', '[::]:10001', '--out', 'json']
+    cmd = [CLI, '--addr', HUB_ADDR, '--out', 'json']
     [cmd.append(x) for x in args]
     print('RUN: {}'.format(' '.join(cmd)))
 
