@@ -16,7 +16,10 @@ pytest .
 
 
 Todo:
-- Miltiple miners
-- Task with miltiple ports
+- make more verbose crash logs
+- How to check hub and miner log output?
+- Attach multiple miners
+- Task with multiple exposed ports
 - Checks for container network metrics
 - Checks for container resource restrictions
+- Work through bad network (random delay, packet loss)
