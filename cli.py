@@ -4,6 +4,7 @@ import subprocess
 
 import infrastructure
 
+IS_VERBOSE = os.getenv("VERBOSE_TEST") is not None
 HUB_ADDR = os.getenv('HUB_ADDR', '[::]:10001')
 CLI = os.path.join(infrastructure.GOPATH, 'src/github.com/sonm-io/core/sonmcli')
 
@@ -11,14 +12,21 @@ CLI = os.path.join(infrastructure.GOPATH, 'src/github.com/sonm-io/core/sonmcli')
 def _call_cli(*args):
     cmd = [CLI, '--addr', HUB_ADDR, '--out', 'json']
     [cmd.append(x) for x in args]
-    print('RUN: {}'.format(' '.join(cmd)))
+    if IS_VERBOSE:
+        print('\r\n****************************************')
+        print('RUN: {}'.format(' '.join(cmd)))
 
     result = subprocess.run(
         cmd,
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
     )
-    return result.stdout.decode('utf-8')
+
+    out = result.stdout.decode('utf-8')
+    if IS_VERBOSE:
+        print('RES: {}'.format(out))
+        print('****************************************\r\n')
+    return out
 
 
 def hub_ping():
