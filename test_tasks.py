@@ -73,9 +73,25 @@ def test_task_start(yoba):
     assert ctr.attrs['Config']['Image'] == 'httpd:latest'
     assert port == '80/tcp'
 
+    # fixme(sshaman1101): hardcoded localhost may be shitty in some cases.
     localAddr = 'http://127.0.0.1:' + ctr.attrs['NetworkSettings']['Ports']['80/tcp'][0]['HostPort']
+    print('TRY TO CONNECT TO PAYLOAD AT {}'.format(localAddr))
 
-    rs = requests.get(localAddr)
+    stepCount = 0
+    maxSteps = 5
+    rs = None
+
+    # try to connect to container's payload every second
+    while stepCount < maxSteps:
+        print('   CONNECTING TO PAYLOAD STEP #{}'.format(stepCount))
+        try:
+            rs = requests.get(localAddr)
+            break
+        except Exception as e:
+            print('   CANNOT CONNECT TO PAYLOAD: {}'.format(e))
+            stepCount += 1
+            time.sleep(1)
+
     assert '<html><body><h1>It works!</h1></body></html>\n' == rs.text
 
 
