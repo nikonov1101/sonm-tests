@@ -13,7 +13,7 @@ GOPATH = os.getenv('GOPATH', os.path.join(HOMEDIR, 'go'))
 BIN_ROOT = os.path.join(GOPATH, 'src/github.com/sonm-io/core')
 HUB = os.path.join(BIN_ROOT, 'sonmhub')
 MINER = os.path.join(BIN_ROOT, 'sonmminer')
-CLI = os.path.join(BIN_ROOT, '/sonmcli')
+CLI = os.path.join(BIN_ROOT, 'sonmcli')
 BOOT_TIMEOUT = 10
 
 

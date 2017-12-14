@@ -1,0 +1,18 @@
+duration:
+  since: 2017-12-20T00:00:00Z
+  until: 2017-12-21T00:00:00Z
+
+rating:
+  buyer: 22
+  supplier: 33
+
+resources:
+  cpu_cores: 1
+  ram_bytes: 100
+  gpu_count: SINGLE_GPU
+  storage: 200
+
+  network:
+    in: 10
+    out: 20
+    type: INCOMING
